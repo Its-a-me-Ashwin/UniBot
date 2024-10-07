@@ -3,7 +3,7 @@
 **UniBot** is a versatile, cost-effective robotic platform designed for human-robot interaction (HRI) and navigation-based research projects. With a maximum continuous payload of 45 kg, UniBot can support up to 60 kg when acceleration is reduced, making it ideal for various experimental and research applications.
 
 
-![](https://github.com/Its-a-me-Ashwin/UniBot/blob/main/images/img1.jpeg) | ![]([https://...Ocean.png](https://github.com/Its-a-me-Ashwin/UniBot/blob/main/images/img2.jpeg))
+![](https://github.com/Its-a-me-Ashwin/UniBot/blob/main/images/img2.jpeg) | ![]([https://...Ocean.png](https://github.com/Its-a-me-Ashwin/UniBot/blob/main/images/img1.jpeg))
 
 
 ## Features
