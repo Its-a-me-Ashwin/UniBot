@@ -3,16 +3,19 @@ import math
 import threading
 import time
 import msvcrt
+import pygame
 from odrive.enums import AXIS_STATE_IDLE, AXIS_STATE_CLOSED_LOOP_CONTROL, CONTROL_MODE_POSITION_CONTROL
+import argparse
 
 class ODriveMotorControl:
     """Class to control both motors of an ODrive with position control, velocity, and torque limits."""
 
-    def __init__(self, maxVelocity, maxTorque):
+    def __init__(self, maxVelocity, maxTorque, verbose=False):
         """Initialize ODriveMotorControl class."""
         self.odrv = self._findOdrive()
         self.odrvAxis0 = self.odrv.axis0
         self.odrvAxis1 = self.odrv.axis1
+        self.verbose = verbose
 
         self.maxVelocity = maxVelocity
         self.maxTorque = maxTorque
@@ -39,7 +42,9 @@ class ODriveMotorControl:
     def _setMaxVelocityTorque(self, axis):
         """Set maximum velocity and torque for an axis."""
         axis.controller.config.vel_limit = self.maxVelocity
-        #axis.motor.config.torque_limit = self.maxTorque
+        ## TODO 
+        ## Enforce the max torque
+        # axis.motor.config.torque_limit = self.maxTorque
 
     def setIdle(self, axisNum):
         """Set the motor to idle mode (i.e., it can move freely)."""
@@ -68,7 +73,10 @@ class ODriveMotorControl:
         axis = self._getAxis(axisNum)
 
         # Check for errors before motion
-        self.checkErrors()
+        if (self.checkErrors()):
+            print("Error in Odrive. Resetting the Odrive")
+            self.rebootOdrive()            
+            axis = self._getAxis(axisNum)
 
         # Get current position in turns
         currentPosition = axis.encoder.pos_estimate
@@ -125,14 +133,19 @@ class ODriveMotorControl:
 
         if odrv_errors:
             print(f"ODrive error: {odrv_errors}")
+            return True
         if axis0_errors:
             print(f"Axis 0 error: {axis0_errors}")
+            return True
         if axis1_errors:
             print(f"Axis 1 error: {axis1_errors}")
+            return True
 
         if not odrv_errors and not axis0_errors and not axis1_errors:
-            print("No errors detected.")
+            if self.verbose:
+                print("No errors detected.")
 
+        return False
 
 class RobotController(object):
     def __init__(self, maxSpeed=1):
@@ -148,7 +161,9 @@ class RobotController(object):
             pass
         except Exception as e:
             print("Unable to stop the motors.")
-            ## Handel with harware conntrol to stop the bot.
+            ## Handle with hardware control to stop the bot.
+            ## TODO:
+            ## For safety this should be done before the HRI work as it is not safe.
 
     def deactivateMotion(self):
         self.motorController.setIdle(0)
@@ -164,8 +179,8 @@ class RobotController(object):
         self.motorController.moveRelativePosition(1, angle)
 
 
-# CLI Control for Windows
-def controlLoop(robot):
+# Keyboard Control for Windows
+def controlLoopKeyboard(robot):
     """Command line interface to control the robot with wasd keys."""
     print("Control the robot with the following keys:")
     print("W: Move forward")
@@ -198,7 +213,58 @@ def controlLoop(robot):
                 print("Invalid key, use W, A, S, D to move or Q to quit")
 
 
-# Example usage
+# Xbox Controller Control with pygame
+def controlLoopXbox(robot):
+    """Control the robot using an Xbox controller."""
+    pygame.init()
+    pygame.joystick.init()
+
+    # Initialize the first connected joystick
+    joystick = pygame.joystick.Joystick(0)
+    joystick.init()
+
+    print("Xbox controller connected.")
+
+    while True:
+        # Update joystick state
+        pygame.event.pump()
+
+        # Check buttons (A = button 0, B = button 1, X = button 2, Y = button 3)
+        if joystick.get_button(0):  # A button pressed
+            print("Moving forward (A button pressed)")
+            robot.moveLinear(100)  # Move forward by 100 mm
+        elif joystick.get_button(1):  # B button pressed
+            print("Moving backward (B button pressed)")
+            robot.turn(45)  # Move backward by 100 mm
+        elif joystick.get_button(2):  # X button pressed
+            print("Turning left (X button pressed)")
+            robot.turn(-45)  # Turn left by 45 degrees
+        elif joystick.get_button(3):  # Y button pressed
+            print("Turning right (Y button pressed)")
+            robot.moveLinear(-100)  # Turn right by 45 degrees
+
+
+        if joystick.get_button(6):  # Map back/select button for quitting
+            print("Quitting and deactivating motors")
+            robot.deactivateMotion()
+            return
+
+
+def controlRobot(robot, interface="keyboard"):
+    """
+    Starts the control loop for the robot based on the interface type.
+    
+    :param robot: RobotController instance
+    :param interface: "keyboard" or "xbox"
+    """
+    if interface == "keyboard":
+        controlLoopKeyboard(robot)
+    elif interface == "xbox":
+        controlLoopXbox(robot)
+    else:
+        print("Invalid interface option. Use 'keyboard' or 'xbox'.")
+
+
 if __name__ == "__main__":
     robot = RobotController(maxSpeed=5)
 
@@ -206,8 +272,20 @@ if __name__ == "__main__":
     robot.motorController.setClosedLoopControl(0)
     robot.motorController.setClosedLoopControl(1)
 
-    # Start the control loop
-    controlLoop(robot)
+    parser = argparse.ArgumentParser(description="Controller")
+    parser.add_argument(
+        "--ct",
+        type=int,
+        choices=[0, 1],  # Only allow 0 or 1
+        default=1,
+        help="Control type",
+    )
+    args = parser.parse_args()
+    # Choose either 'keyboard' or 'xbox' for controlling the robot
+    control_type = "xbox" if args.ct == 0 else "keyboard"
+    
+    # Start the control loop based on the chosen interface
+    controlRobot(robot, control_type)
 
     # Clean up and deactivate motors
     robot.deactivateMotion()
