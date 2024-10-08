@@ -28,7 +28,7 @@ All CAD and STL files for the robot platform are available on [Onshape](https://
 | **M6 Bolts and Nuts**               |                                                                                              | 32       |
 | **M8 Bolts and Nuts**               |                                                                                              | 16       |
 | **M12 Bolts and Nuts**              |                                                                                              | 4        |
-
+| **Battery 36V or 24V min 2.5Ah**    | Ebay                                                                                         | 1        |
 **Total Estimated Cost**: ~500 USD
 
 ## Software
