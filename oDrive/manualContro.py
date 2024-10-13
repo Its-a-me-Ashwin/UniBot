@@ -177,28 +177,43 @@ def controlLoopKeyboard(stdscr, robot):
     """Control the robot with the wasd keys over SSH."""
     stdscr.nodelay(True)  # Non-blocking input
     stdscr.clear()
-    stdscr.addstr("Control the robot with the following keys:\n")
-    stdscr.addstr("W: Move forward\nS: Move backward\nA: Turn left\nD: Turn right\nQ: Quit and deactivate motors\n")
-    
+
+    # Get the size of the terminal window
+    max_y, max_x = stdscr.getmaxyx()
+
+    # Define a safe area for writing text to the terminal (within bounds)
+    def safe_addstr(y, x, text):
+        """Safely add string to the window, ensuring we stay within bounds."""
+        if y < max_y and x < max_x:
+            try:
+                stdscr.addstr(y, x, text)
+            except curses.error:
+                pass  # Ignore errors caused by trying to write out of bounds
+
+    safe_addstr(0, 0, "Control the robot with the following keys:\n")
+    safe_addstr(1, 0, "W: Move forward\nS: Move backward\nA: Turn left\nD: Turn right\nQ: Quit and deactivate motors\n")
+
     while True:
         key = stdscr.getch()
 
         if key == ord('w'):
-            stdscr.addstr("Moving forward\n")
+            safe_addstr(3, 0, "Moving forward\n")
             robot.moveLinear(100)  # Move forward by 100 mm
         elif key == ord('s'):
-            stdscr.addstr("Moving backward\n")
+            safe_addstr(3, 0, "Moving backward\n")
             robot.moveLinear(-100)  # Move backward by 100 mm
         elif key == ord('a'):
-            stdscr.addstr("Turning left\n")
+            safe_addstr(3, 0, "Turning left\n")
             robot.turn(-45)  # Turn left by 45 degrees
         elif key == ord('d'):
-            stdscr.addstr("Turning right\n")
+            safe_addstr(3, 0, "Turning right\n")
             robot.turn(45)  # Turn right by 45 degrees
         elif key == ord('q'):
-            stdscr.addstr("Quitting and deactivating motors\n")
+            safe_addstr(3, 0, "Quitting and deactivating motors\n")
             robot.deactivateMotion()
             break
+
+        stdscr.refresh()  # Refresh the screen to show updates
         time.sleep(0.1)  # Slow down the loop slightly for better responsiveness
         
 # Xbox Controller Control with pygame
