@@ -181,26 +181,28 @@ def controlLoopKeyboard(stdscr, robot):
     stdscr.addstr("W: Move forward\nS: Move backward\nA: Turn left\nD: Turn right\nQ: Quit and deactivate motors\n")
     
     while True:
-        key = stdscr.getch()
-
-        if key == ord('w'):
-            stdscr.addstr("Moving forward\n")
-            robot.moveLinear(100)  # Move forward by 100 mm
-        elif key == ord('s'):
-            stdscr.addstr("Moving backward\n")
-            robot.moveLinear(-100)  # Move backward by 100 mm
-        elif key == ord('a'):
-            stdscr.addstr("Turning left\n")
-            robot.turn(-45)  # Turn left by 45 degrees
-        elif key == ord('d'):
-            stdscr.addstr("Turning right\n")
-            robot.turn(45)  # Turn right by 45 degrees
-        elif key == ord('q'):
-            stdscr.addstr("Quitting and deactivating motors\n")
-            robot.deactivateMotion()
-            break
-        time.sleep(0.1)  # Slow down the loop slightly for better responsiveness
-
+        try:
+            key = stdscr.getch()
+    
+            if key == ord('w'):
+                stdscr.addstr("Moving forward\n")
+                robot.moveLinear(100)  # Move forward by 100 mm
+            elif key == ord('s'):
+                stdscr.addstr("Moving backward\n")
+                robot.moveLinear(-100)  # Move backward by 100 mm
+            elif key == ord('a'):
+                stdscr.addstr("Turning left\n")
+                robot.turn(-45)  # Turn left by 45 degrees
+            elif key == ord('d'):
+                stdscr.addstr("Turning right\n")
+                robot.turn(45)  # Turn right by 45 degrees
+            elif key == ord('q'):
+                stdscr.addstr("Quitting and deactivating motors\n")
+                robot.deactivateMotion()
+                break
+            time.sleep(0.1)  # Slow down the loop slightly for better responsiveness
+        except: Exception as e:
+            continue
 
 # Xbox Controller Control with pygame
 def controlLoopXbox(robot):
