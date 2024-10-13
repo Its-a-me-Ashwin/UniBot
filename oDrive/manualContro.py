@@ -1,11 +1,9 @@
-## This is script compatible with Linux.
-## Make sure the motors are configured and the safety limits are set before running this code.
 import odrive
 import math
 import threading
 import time
 import pygame
-import keyboard  # Cross-platform keyboard input
+import curses  # For SSH-compatible keyboard input
 from odrive.enums import AXIS_STATE_IDLE, AXIS_STATE_CLOSED_LOOP_CONTROL, CONTROL_MODE_POSITION_CONTROL
 import argparse
 
@@ -174,33 +172,34 @@ class RobotController:
         self.motorController.moveRelativePosition(1, angle)
 
 
-# Keyboard Control for Linux using 'keyboard' library
-def controlLoopKeyboard(robot):
-    """Control the robot with the wasd keys."""
-    print("Control the robot with the following keys:")
-    print("W: Move forward")
-    print("S: Move backward")
-    print("A: Turn left")
-    print("D: Turn right")
-    print("Q: Quit and deactivate motors")
-
+# Keyboard Control for Linux using 'curses' library (for SSH compatibility)
+def controlLoopKeyboard(stdscr, robot):
+    """Control the robot with the wasd keys over SSH."""
+    stdscr.nodelay(True)  # Non-blocking input
+    stdscr.clear()
+    stdscr.addstr("Control the robot with the following keys:\n")
+    stdscr.addstr("W: Move forward\nS: Move backward\nA: Turn left\nD: Turn right\nQ: Quit and deactivate motors\n")
+    
     while True:
-        if keyboard.is_pressed('w'):
-            print("Moving forward")
+        key = stdscr.getch()
+
+        if key == ord('w'):
+            stdscr.addstr("Moving forward\n")
             robot.moveLinear(100)  # Move forward by 100 mm
-        elif keyboard.is_pressed('s'):
-            print("Moving backward")
+        elif key == ord('s'):
+            stdscr.addstr("Moving backward\n")
             robot.moveLinear(-100)  # Move backward by 100 mm
-        elif keyboard.is_pressed('a'):
-            print("Turning left")
+        elif key == ord('a'):
+            stdscr.addstr("Turning left\n")
             robot.turn(-45)  # Turn left by 45 degrees
-        elif keyboard.is_pressed('d'):
-            print("Turning right")
+        elif key == ord('d'):
+            stdscr.addstr("Turning right\n")
             robot.turn(45)  # Turn right by 45 degrees
-        elif keyboard.is_pressed('q'):
-            print("Quitting and deactivating motors")
+        elif key == ord('q'):
+            stdscr.addstr("Quitting and deactivating motors\n")
             robot.deactivateMotion()
             break
+        time.sleep(0.1)  # Slow down the loop slightly for better responsiveness
 
 
 # Xbox Controller Control with pygame
@@ -243,7 +242,7 @@ def controlLoopXbox(robot):
 def controlRobot(robot, interface="keyboard"):
     """Starts the control loop for the robot based on the interface type."""
     if interface == "keyboard":
-        controlLoopKeyboard(robot)
+        curses.wrapper(controlLoopKeyboard, robot)  # For SSH-compatible keyboard control
     elif interface == "xbox":
         controlLoopXbox(robot)
     else:
@@ -263,7 +262,7 @@ if __name__ == "__main__":
         type=int,
         choices=[0, 1],  # Only allow 0 or 1
         default=1,
-        help="Control type",
+        help="Control type (0 for Xbox controller, 1 for keyboard)",
     )
     args = parser.parse_args()
     # Choose either 'keyboard' or 'xbox' for controlling the robot
