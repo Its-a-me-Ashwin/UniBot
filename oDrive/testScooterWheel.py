@@ -6,6 +6,11 @@ import pygame
 from odrive.enums import AXIS_STATE_IDLE, AXIS_STATE_CLOSED_LOOP_CONTROL, CONTROL_MODE_POSITION_CONTROL
 import argparse
 
+## RUN this code if in headless ENV. This will fix issues with XBOX controllers. 
+import os
+os.environ["SDL_VIDEODRIVER"] = "dummy"
+os.environ["XDG_RUNTIME_DIR"] = "/tmp/$(id -u)-runtime-dir"
+
 class ODriveMotorControl:
     """Class to control both motors of an ODrive with position control, velocity, and torque limits."""
 
