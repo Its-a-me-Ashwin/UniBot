@@ -236,17 +236,17 @@ def controlLoopXbox(robot):
         pygame.event.pump()
 
         # Check buttons (A = button 0, B = button 1, X = button 2, Y = button 3)
-        if joystick.get_button(0):  # A button pressed
-            print("Moving forward (A button pressed)")
+        if joystick.get_button(4):  # Y button pressed
+            print("Moving forward (Y button pressed)")
             robot.moveLinear(100)  # Move forward by 100 mm
-        elif joystick.get_button(1):  # B button pressed
-            print("Moving backward (B button pressed)")
+        elif joystick.get_button(0):  # A button pressed
+            print("Moving backward (A button pressed)")
             robot.turn(45)  # Move backward by 100 mm
-        elif joystick.get_button(2):  # X button pressed
+        elif joystick.get_button(3):  # X button pressed
             print("Turning left (X button pressed)")
             robot.turn(-45)  # Turn left by 45 degrees
-        elif joystick.get_button(3):  # Y button pressed
-            print("Turning right (Y button pressed)")
+        elif joystick.get_button(1):  # B button pressed
+            print("Turning right (B button pressed)")
             robot.moveLinear(-100)  # Turn right by 45 degrees
 
 
