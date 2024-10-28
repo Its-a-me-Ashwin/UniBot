@@ -2,7 +2,6 @@ import odrive
 import math
 import threading
 import time
-import msvcrt
 import pygame
 from odrive.enums import AXIS_STATE_IDLE, AXIS_STATE_CLOSED_LOOP_CONTROL, CONTROL_MODE_POSITION_CONTROL
 import argparse
@@ -181,6 +180,8 @@ class RobotController(object):
 
 # Keyboard Control for Windows
 def controlLoopKeyboard(robot):
+    ## For windows
+    import msvcrt
     """Command line interface to control the robot with wasd keys."""
     print("Control the robot with the following keys:")
     print("W: Move forward")
