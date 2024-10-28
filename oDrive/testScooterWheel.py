@@ -241,13 +241,13 @@ def controlLoopXbox(robot):
             robot.moveLinear(100)  # Move forward by 100 mm
         elif joystick.get_button(0):  # A button pressed
             print("Moving backward (A button pressed)")
-            robot.turn(45)  # Move backward by 100 mm
+            robot.moveLinear(-100)  # Move backward by 100 mm
         elif joystick.get_button(3):  # X button pressed
             print("Turning left (X button pressed)")
             robot.turn(-45)  # Turn left by 45 degrees
         elif joystick.get_button(1):  # B button pressed
             print("Turning right (B button pressed)")
-            robot.moveLinear(-100)  # Turn right by 45 degrees
+            robot.turn(45)  # Turn right by 45 degrees
 
 
         if joystick.get_button(6):  # Map back/select button for quitting
