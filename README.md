@@ -37,4 +37,4 @@ The initial Python code to configure both scooter motors is available, including
 
 ---
 
-For questions, contributions, or further information, please feel free to reach out.
+For questions, contributions, or further information, please feel free to reach out or please checkout [this](https://github.com/Its-a-me-Ashwin/SpeedyNav) repo for a n indepth look at its appliacation (in progress). 
