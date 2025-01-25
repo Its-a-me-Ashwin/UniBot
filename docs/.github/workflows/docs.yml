@@ -1,0 +1,41 @@
+# .github/workflows/docs.yml
+
+name: Build and Deploy Docs
+
+on:
+  push:
+    branches:
+      - main  # or whichever branch you're using
+  pull_request:
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          # Either install Sphinx + theme directly:
+          pip install sphinx sphinx-rtd-theme
+          # Or install everything from your docs/requirements.txt:
+          # pip install -r docs/requirements.txt
+
+      - name: Build docs
+        run: |
+          cd docs
+          sphinx-build -b html . _build/html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/_build/html
+          publish_branch: gh-pages
