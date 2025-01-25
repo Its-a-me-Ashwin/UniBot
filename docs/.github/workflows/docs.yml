@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main  # or whichever branch you're using
+      - gh-pages
   pull_request:
 
 jobs:
