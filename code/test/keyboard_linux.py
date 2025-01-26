@@ -11,7 +11,7 @@ SRC_DIR = os.path.join(CURRENT_DIR, "..", "src")
 sys.path.append(SRC_DIR)
 
 from unibot import Unibot
-from exception import ODriveError  # Custom exception defined in exception.py
+from exceptione import ODriveError  # Custom exception defined in exception.py
 
 
 def keyboard_loop(unibot):
