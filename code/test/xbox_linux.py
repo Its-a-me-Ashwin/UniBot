@@ -9,7 +9,7 @@ SRC_DIR = os.path.join(CURRENT_DIR, "..", "src")
 sys.path.append(SRC_DIR)
 
 from unibot import Unibot
-from exception import ODriveError  # Custom ODrive exception class
+from exceptions import ODriveError  # Custom ODrive exception class
 
 def init_joystick():
     """
