@@ -5,7 +5,8 @@ name: Build and Deploy Docs
 on:
   push:
     branches:
-      - main  # or whichever branch you're using
+      - main 
+      - gh-pages
   pull_request:
 
 jobs:
@@ -23,10 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          # Either install Sphinx + theme directly:
           pip install sphinx sphinx-rtd-theme
-          # Or install everything from your docs/requirements.txt:
-          # pip install -r docs/requirements.txt
 
       - name: Build docs
         run: |
