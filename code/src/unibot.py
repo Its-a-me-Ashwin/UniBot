@@ -2,7 +2,6 @@ import odrive
 import math
 import threading
 import time
-import msvcrt
 from odrive.enums import (
     AXIS_STATE_IDLE,
     AXIS_STATE_CLOSED_LOOP_CONTROL,

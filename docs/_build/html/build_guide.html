@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build Guide &mdash; Unibot 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Mechanical Design" href="mechanical_design.html" />
+    <link rel="prev" title="Welcome to Unibot Documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Unibot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Build Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mechanical-assembly">Mechanical Assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mechanical_design.html">Mechanical Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="software_support.html">Software Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bluetooth_setup.html">Connecting Xbox Controller to Raspberry Pi via SSH</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Unibot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Build Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/build_guide.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="build-guide">
+<h1>Build Guide<a class="headerlink" href="#build-guide" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This page walks you through assembling the robot step by step. It also provides an overview of the necessary tools, materials, and prerequisites.</p>
+</section>
+<section id="mechanical-assembly">
+<h2>Mechanical Assembly<a class="headerlink" href="#mechanical-assembly" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Print or Laser-Cut Parts</strong>: Instructions on how to obtain the mechanical parts.</p></li>
+<li><p><strong>Gather Fasteners</strong>: List of required screws, nuts, washers, etc.</p></li>
+<li><p><strong>Parts List</strong>:
+- 3D print all the necessary parts. It is recommended to use ASA or ABS with 80% infill and at least 8 walls to increase strength.
+- Laser-cut all the provided DXF files using either acrylic or MDF. Non-structural plates, such as the bottom plate, can be cut from plywood.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1803.jpg"><img alt="Assembly Step 1" src="_images/IMG_1803.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic">
+<li><p><strong>Building Steps</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Step 1</strong>:
+Gather the main brackets and bolts.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1806.jpg"><img alt="Assembly Step 2" src="_images/IMG_1806.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 2</strong>:
+Assemble the main brackets and bolts.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1808.jpg"><img alt="Assembly Step 2" src="_images/IMG_1808.jpg" style="width: 150px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 3</strong>:
+Attach the two longer boards to the main brackets using eight M8x20 bolts. The bolts will be loose for now, which is fine.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1811.jpg"><img alt="Assembly Step 2" src="_images/IMG_1811.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 4</strong>:
+Insert the M8 nuts into the holes in the spacers. Tighten all eight M8x20 bolts using an Allen key with a rounded head.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1814.jpg"><img alt="Assembly Step 2" src="_images/IMG_1814.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 5</strong>:
+Get the angled brackets and attach them to the main frame using M8x20 bolts.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1817.jpg"><img alt="Assembly Step 2" src="_images/IMG_1817.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 6</strong>:
+Get the two front panels and four M8x20 bolts and nuts. Attach the front and back panels as shown.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1824.jpg"><img alt="Assembly Step 2" src="_images/IMG_1824.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 7</strong>:
+Get the M10x20 bolts and attach them through the bottom holes on the angled brackets. Refer to the pictures for details. Use a long Allen key to tighten the bolts.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1832.jpg"><img alt="Assembly Step 2" src="_images/IMG_1832.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 8</strong>:
+Attach the bottom plate (the one with holes for the electronics) to the angled brackets using M10 bolts and nuts. Use M12x10 bolts to reinforce the attachment to the main bracket.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1837.jpg"><img alt="Assembly Step 2" src="_images/IMG_1837.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 9</strong>:
+Place the robot on its side as shown in the picture. This is how it should look.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1841.jpg"><img alt="Assembly Step 2" src="_images/IMG_1841.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 10</strong>:
+Attach the main board (Raspberry Pi 5) using M3 standoffs, nuts, and nylon bolts.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1843.jpg"><img alt="Assembly Step 2" src="_images/IMG_1843.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 11</strong>:
+Install the scooter motor. Carefully insert the wires into the hole on the side bracket and tighten the main bolt into the panel.
+Ensure that no orthogonal force is applied to the axis, as this may stress the panels. Instead, rotate the bolt while keeping the motor upright to tighten it.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1847.jpg"><img alt="Assembly Step 2" src="_images/IMG_1847.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 12</strong>:
+Use a nut to secure the motor bolt. Apply a small amount of Loctite to prevent it from loosening due to vibrations.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1848.jpg"><img alt="Assembly Step 2" src="_images/IMG_1848.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 13</strong>:
+Get the outer panel and tighten the motor’s nut and bolt. Also, secure it to the spacers using four M8x20 bolts and nuts.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1850.jpg"><img alt="Assembly Step 2" src="_images/IMG_1850.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 14</strong>:
+Repeat the previous steps to attach the second motor to the other side. Manage the wiring accordingly. You can trim the wires if this is the final setup for the motors.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1860.jpg"><img alt="Assembly Step 2" src="_images/IMG_1860.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 15</strong>:
+Insert the caster wheel holders. Ensure that the springs are installed and that the suspension system functions correctly before final assembly.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1865.jpg"><img alt="Assembly Step 2" src="_images/IMG_1865.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 16</strong>:
+Secure the caster wheel holders using an M8 bolt and M8 grub nut. These bolts will later be used to attach the depth camera.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1869.jpg"><img alt="Assembly Step 2" src="_images/IMG_1869.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 17</strong>:
+Install the ODrive controller using M3 standoffs and nuts.</p>
+<ul class="simple">
+<li><p>Prepare the wires by adding toroid cores at the end of the power wires for the motor.</p></li>
+<li><p>Add male pin connectors to the signal wires.</p></li>
+<li><p>The format should be: <strong>+ A B C -</strong>, where:
+- Red = Positive
+- Black = Negative
+- Green, Blue, Yellow = Motor phase wires (order may vary).</p></li>
+</ul>
+</li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1874.jpg"><img alt="Assembly Step 2" src="_images/IMG_1874.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 18</strong> (Optional):
+Add 44nF capacitors between ground and all control signals on the ODrive.
+Connect the encoder wires to the ODrive and add a power resistor (2Ω, 50W) between the power input and ground.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1878.jpg"><img alt="Assembly Step 2" src="_images/IMG_1878.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 19</strong>:
+Place the main battery in the remaining space.</p>
+<ul class="simple">
+<li><p>For the demonstration, the largest battery that fits is used.</p></li>
+<li><p>Any battery above <strong>24V and 3Ah</strong> should be sufficient.</p></li>
+<li><p>Use a <strong>DC-DC converter</strong> with a USB-C output to power the Raspberry Pi.</p></li>
+<li><p>Connect the ODrive to the Raspberry Pi via USB.</p></li>
+<li><p>Add a power switch between the battery, ODrive, and DC-DC regulator.</p></li>
+<li><p>Route the battery’s charging cable to the top plate for easy access.</p></li>
+</ul>
+</li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1881.jpg"><img alt="Assembly Step 2" src="_images/IMG_1881.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 20</strong>:
+Secure the top plate using M10 nuts. If carrying a payload, use M12 bolts of any length (M12x70 bolts are used in the demo).</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1884.jpg"><img alt="Assembly Step 2" src="_images/IMG_1884.jpg" style="width: 300px;" />
+</a>
+<ol class="arabic simple">
+<li><p><strong>Step 21</strong>:
+Place the robot on a stand for initial testing and calibration.</p></li>
+</ol>
+<a class="reference internal image-reference" href="_images/IMG_1885.jpg"><img alt="Assembly Step 2" src="_images/IMG_1885.jpg" style="width: 300px;" />
+</a>
+</li>
+</ol>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>Once assembled, perform a quick check to ensure that all components move freely. Refer to the software setup guide to fully test the robot. Mechanical assembly is now complete.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Unibot Documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mechanical_design.html" class="btn btn-neutral float-right" title="Mechanical Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, anonymous.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
