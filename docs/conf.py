@@ -34,6 +34,8 @@ master_doc = 'index'
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 
+html_baseurl = "https://its-a-me-ashwin.github.io/UniBot/"
+
 # Optionally, you can include a custom CSS file in _static if you want:
 # html_css_files = [
 #     'custom.css',
