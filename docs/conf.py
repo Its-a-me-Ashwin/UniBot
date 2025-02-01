@@ -8,9 +8,9 @@ import sys
 # sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
-project = 'MyRobotPupper'
-copyright = '2025, Your Name'
-author = 'Your Name'
+project = 'Unibot'
+copyright = '2025, anonymous'
+author = 'anonymous'
 
 # The short X.Y version
 version = '0.1'

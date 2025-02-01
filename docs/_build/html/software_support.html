@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Software Support &mdash; MyRobotPupper 0.1.0 documentation</title>
+  <title>Software Support &mdash; Unibot 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -32,7 +32,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            MyRobotPupper
+            Unibot
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -50,7 +50,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#initial-calibration">Initial Calibration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#example-usage-of-the-repository">Example Usage of the Repository</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bluetooth_setup.html">Connecting Xbox Controller to Raspberry Pi via SSH</a></li>
@@ -62,7 +61,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">MyRobotPupper</a>
+          <a href="index.html">Unibot</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -123,18 +122,49 @@ pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </s
 </section>
 <section id="example-usage-of-the-repository">
 <h2>Example Usage of the Repository<a class="headerlink" href="#example-usage-of-the-repository" title="Link to this heading"></a></h2>
-<p>Run the following commands to start your robot’s software.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>MyRobotPupper
-python3<span class="w"> </span>main.py
+<p>Run the folloing to set up a simple waypoint mission to make the robot move around.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+import<span class="w"> </span><span class="nb">time</span>
+from<span class="w"> </span>unibot<span class="w"> </span>import<span class="w"> </span>Unibot
+from<span class="w"> </span>unibot<span class="w"> </span>import<span class="w"> </span>Waypoints,<span class="w"> </span>Waypoint<span class="w">  </span><span class="c1"># Or &quot;from unibot.waypoints import Waypoints, Waypoint&quot; if you prefer</span>
+
+def<span class="w"> </span>main<span class="o">()</span>:
+<span class="w">   </span><span class="c1"># 1. Create your Unibot instance</span>
+<span class="w">   </span><span class="nv">unibot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Unibot<span class="o">(</span><span class="nv">max_speed</span><span class="o">=</span><span class="m">50</span>,<span class="w"> </span><span class="nv">max_acceleration</span><span class="o">=</span><span class="m">10</span><span class="o">)</span>
+
+<span class="w">   </span><span class="c1"># 2. Set the motors to closed-loop control</span>
+<span class="w">   </span>unibot.motor_controller.setClosedLoopControl<span class="o">(</span><span class="m">0</span><span class="o">)</span>
+<span class="w">   </span>unibot.motor_controller.setClosedLoopControl<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+<span class="w">   </span>print<span class="o">(</span><span class="s2">&quot;Motors set to CLOSED-LOOP control.&quot;</span><span class="o">)</span>
+
+<span class="w">   </span><span class="c1"># 3. Define some waypoints</span>
+<span class="w">   </span><span class="c1">#    Each Waypoint has a direction (x, y), a speed, a duration, and an optional delay after the move</span>
+<span class="w">   </span><span class="nv">waypoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Waypoints<span class="o">()</span>
+<span class="w">   </span>waypoints.add_waypoint<span class="o">(</span>Waypoint<span class="o">(</span><span class="nv">direction</span><span class="o">=(</span><span class="m">0</span>,<span class="w"> </span><span class="m">1</span><span class="o">)</span>,<span class="w"> </span><span class="nv">speed</span><span class="o">=</span><span class="m">0</span>.5,<span class="w"> </span><span class="nv">duration</span><span class="o">=</span><span class="m">3</span>.0,<span class="w"> </span><span class="nv">delay</span><span class="o">=</span><span class="m">1</span>.0<span class="o">))</span><span class="w">  </span><span class="c1"># Move forward</span>
+<span class="w">   </span>waypoints.add_waypoint<span class="o">(</span>Waypoint<span class="o">(</span><span class="nv">direction</span><span class="o">=(</span><span class="m">1</span>,<span class="w"> </span><span class="m">0</span><span class="o">)</span>,<span class="w"> </span><span class="nv">speed</span><span class="o">=</span><span class="m">0</span>.3,<span class="w"> </span><span class="nv">duration</span><span class="o">=</span><span class="m">2</span>.0,<span class="w"> </span><span class="nv">delay</span><span class="o">=</span><span class="m">1</span>.0<span class="o">))</span><span class="w">  </span><span class="c1"># Turn right</span>
+<span class="w">   </span>waypoints.add_waypoint<span class="o">(</span>Waypoint<span class="o">(</span><span class="nv">direction</span><span class="o">=(</span><span class="m">0</span>,<span class="w"> </span>-1<span class="o">)</span>,<span class="w"> </span><span class="nv">speed</span><span class="o">=</span><span class="m">0</span>.5,<span class="w"> </span><span class="nv">duration</span><span class="o">=</span><span class="m">3</span>.0,<span class="w"> </span><span class="nv">delay</span><span class="o">=</span><span class="m">0</span>.5<span class="o">))</span><span class="w"> </span><span class="c1"># Move backward</span>
+<span class="w">   </span>waypoints.add_waypoint<span class="o">(</span>Waypoint<span class="o">(</span><span class="nv">direction</span><span class="o">=(</span>-1,<span class="w"> </span><span class="m">0</span><span class="o">)</span>,<span class="w"> </span><span class="nv">speed</span><span class="o">=</span><span class="m">0</span>.3,<span class="w"> </span><span class="nv">duration</span><span class="o">=</span><span class="m">2</span>.0,<span class="w"> </span><span class="nv">delay</span><span class="o">=</span><span class="m">0</span>.0<span class="o">))</span><span class="w"> </span><span class="c1"># Turn left</span>
+
+<span class="w">   </span><span class="c1"># 4. Execute the waypoints asynchronously</span>
+<span class="w">   </span>print<span class="o">(</span><span class="s2">&quot;Executing waypoints...&quot;</span><span class="o">)</span>
+<span class="w">   </span>waypoints.execute_async<span class="o">(</span>unibot<span class="o">)</span>
+
+<span class="w">   </span><span class="c1"># (Optional) Let the robot do its moves for 10 seconds</span>
+<span class="w">   </span>time.sleep<span class="o">(</span><span class="m">10</span><span class="o">)</span>
+
+<span class="w">   </span><span class="c1"># 5. Stop execution (if you want to halt prematurely or after finishing)</span>
+<span class="w">   </span>print<span class="o">(</span><span class="s2">&quot;Stopping waypoints execution...&quot;</span><span class="o">)</span>
+<span class="w">   </span>waypoints.stop_execution<span class="o">(</span>unibot<span class="o">)</span>
+
+<span class="w">   </span><span class="c1"># Deactivate the motors or keep them in closed-loop as you see fit</span>
+<span class="w">   </span>unibot.motor_controller.setIdle<span class="o">(</span><span class="m">0</span><span class="o">)</span>
+<span class="w">   </span>unibot.motor_controller.setIdle<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+<span class="w">   </span>print<span class="o">(</span><span class="s2">&quot;Motors set to IDLE. Done.&quot;</span><span class="o">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="nv">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;__main__&quot;</span>:
+<span class="w">   </span>main<span class="o">()</span>
 </pre></div>
 </div>
-</section>
-<section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p><strong>Issue 1</strong>: Symptom, cause, and solution.</p></li>
-<li><p><strong>Issue 2</strong>: Symptom, cause, and solution.</p></li>
-</ul>
 </section>
 </section>
 
@@ -149,7 +179,7 @@ python3<span class="w"> </span>main.py
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, Your Name.</p>
+    <p>&#169; Copyright 2025, anonymous.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
