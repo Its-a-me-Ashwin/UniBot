@@ -33,6 +33,7 @@ master_doc = 'index'
 # -- Options for HTML output -------------------------------------------------
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
+html_extra_path = ['_static']
 
 html_baseurl = "https://its-a-me-ashwin.github.io/UniBot/"
 
